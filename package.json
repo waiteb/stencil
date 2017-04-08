@@ -1,0 +1,23 @@
+{
+  "name": "stencil",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/stencil.js",
+  "scripts": {
+    "test": "mocha ./lib/*.test.js"
+  },
+  "author": "b.waite",
+  "license": "ISC",
+  "dependencies": {
+    "dom-parser": "^0.1.5",
+    "domjson": "^0.1.2",
+    "jsep": "^0.3.0",
+    "xmldom": "^0.1.27"
+  },
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "chai": "^3.5.0",
+    "chai-spies": "^0.7.1",
+    "mocha": "^3.2.0"
+  }
+}
