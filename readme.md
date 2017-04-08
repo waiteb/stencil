@@ -42,9 +42,8 @@
     <p>Ternary condition:  Variable is {{foo? "truthy" : "falsey"}}</p>
     <p if="!foo && (bar || baz) > 0">Complex conditions (via http://jsep.from.so/?)</p>
     
-
     <div switch="foo">
-        <p case="0, 2-3"></p>
+        <p case="0, 2, 3, 4"></p>
         <p case="4"></p>
         <p case="5-6, 8"></p>
         <p default></p>
