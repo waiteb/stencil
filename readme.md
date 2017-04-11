@@ -68,22 +68,6 @@
     <h2>Substencils</h2>
     <script>
 
-        // The each attribute repeats an element:
-        var html = '<div><stencil name="greeting"/></div>';
-        var subhtml = '<p>Hi.</p>';
-
-        var Stencil = require('stencil');
-        var stencil = new Stencil(html);
-        var substencil = new Stencil(subhtml);
-
-        console.log(stencil.render(model));    // <div><p>Hi.</p></div>
-                                               
-    </script>
-
-
-    <h2>Substencils</h2>
-    <script>
-
         var html = '<div><stencil name="greeting"/></div>';
         var subhtml = '<p>Hi.</p>';
 
