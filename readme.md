@@ -1,7 +1,9 @@
 # Stencil Templating Engine
 ```
     <h1>Welcome</h1>
-    <p>Stencil makes it easy to write reusable HTML templates.</p>
+    <p><b>Stencil makes it easy to write reusable HTML templates.</b></p>
+    <p>Stencil uses HTML as its templating language.  Any valid HTML is a valid template.</p>
+    <p>Stencil is easy to extend. All of Stencil's built-in features were created using the same API available to you.</p>
 
     <h2>Expressions</h2>
     <script>
@@ -94,17 +96,5 @@
         console.log(stencil.render(model));    // Hello!
                                                
     </script>
-
-
-    <h2>Customization</h2>
-    <p>All of Stencil's built-in features were created using the same API available to you. You can add:</p>
-
-    <ul>
-        <li>Expressions</li>
-        <li>Attributes</li>
-        <li>Elements</li>
-        <li>Filters</li>        
-    </ul>
-
 
 
