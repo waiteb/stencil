@@ -1,4 +1,5 @@
-# Stencil Templating Engine
+# Stencil 
+## A Templating Engine
 ```
     <h1>Welcome</h1>
     <p><b>Stencil makes it easy to write reusable HTML templates.</b></p>
