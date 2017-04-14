@@ -1,10 +1,11 @@
+/* jshint esversion: 6 */
 var Stencil = require("./index");
 var html = `
     <div alpha="123" beta="123" gamma="123">
         <div alpha="123" beta="123" gamma="123">
             <div alpha="123" beta="123" gamma="123"></div>
-            </div>
         </div>
+     </div>
 `;
 var times = 1024 * 8;
 
