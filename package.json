@@ -4,7 +4,8 @@
   "description": "",
   "main": "./lib/stencil.js",
   "scripts": {
-    "test": "mocha ./lib/*.test.js"
+    "test": "mocha ./lib/*.test.js",
+    "perf": "node --inspect --debug-brk perf.js"
   },
   "author": "b.waite",
   "license": "ISC",
