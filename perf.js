@@ -35,10 +35,16 @@ var model = {
     }    
 };
 
+
+
+var start = Date.now();
+var totalBytes = 0;
+
 if (console.profile) {console.profile("stencil.render");}
-console.time("x" + times);
 for (let i = 0, n = times; i < n; i++) {
-    let html = stencil.render(model);
+    totalBytes += stencil.render(model).length;
 }
-console.timeEnd("x" + times);
 if (console.profile) {console.profileEnd("stencil.render");}
+
+var end = Date.now() - start;
+console.log(end + "ms", Math.floor(totalBytes / 1000000) + "MB", Math.floor((end / totalBytes) * 1000000) + "ms/MB");
