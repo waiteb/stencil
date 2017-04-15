@@ -4,14 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "type": "node",
             "request": "launch",
             "name": "Mocha",
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
             "args": ["--no-timeouts", "--colors", "${workspaceRoot}/lib/*.test.js"],
-            //"args": ["--no-timeouts", "--colors", "${workspaceRoot}/lib/scratchpad.test.js"],
+            //"args": ["--no-timeouts", "--colors", "${workspaceRoot}/perf.js"],
             "cwd": "${workspaceRoot}"
         }
     ]
