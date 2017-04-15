@@ -2,7 +2,7 @@
 var Stencil = require("./index");
 var request = require('sync-request');
 
-var html = `
+var variables = `
     <div alpha="{{alpha.value}}" beta="{{alpha.beta.value}}">
         <div alpha="{{alpha.value}}" beta="{{alpha.beta.value}}">
             <div alpha="{{alpha.value}}" beta="{{alpha.beta.value}}">
@@ -10,20 +10,20 @@ var html = `
             </div>
         </div>
      </div>
+`;
 
+var simpleHtml = `
     <div alpha="alpha.value" beta="alpha.beta.value">
         <div alpha="alpha.value" beta="alpha.beta.value">
             <div alpha="alpha.value" beta="alpha.beta.value">
             </div>
         </div>
-    </div>
-`;
+    </div>`;
 
-html = request("GET", "http://google.com").body.toString();
+var google = request("GET", "http://google.com").body.toString();
+var wikipedia = request("GET", "https://en.wikipedia.org/wiki/Main_Page").body.toString();
 
-var times = 1024 * 8;
-
-var stencil = new Stencil(html);
+var times = 1024;
 
 var model = {
     alpha: {
@@ -35,16 +35,39 @@ var model = {
     }    
 };
 
+function pad(n) {
+  n = "" + n;
+  while(n.length < 16) {
+      n = " " + n;
+  }
 
-
-var start = Date.now();
-var totalBytes = 0;
-
-if (console.profile) {console.profile("stencil.render");}
-for (let i = 0, n = times; i < n; i++) {
-    totalBytes += stencil.render(model).length;
+  return n;
 }
-if (console.profile) {console.profileEnd("stencil.render");}
 
-var end = Date.now() - start;
-console.log(end + "ms", Math.floor(totalBytes / 1000000) + "MB", Math.floor((end / totalBytes) * 1000000) + "ms/MB");
+
+function render(html, model, title) {
+
+    var stencil = new Stencil(html);
+    var start = Date.now();
+    var totalBytes = 0;
+
+    if (console.profile) {console.profile(title);}
+    for (let i = 0, n = times; i < n; i++) {
+        totalBytes += stencil.render(model).length;
+    }
+    if (console.profile) {console.profileEnd(title);}
+
+    var time = Date.now() - start;
+    var totalMB = totalBytes / 1000000;
+        totalMB = pad(Math.round(totalMB * 10) / 10 + "MB");
+    var mbPerMs = (time / totalBytes) * 1000000,
+        mbPerMs = pad(Math.round(mbPerMs * 1) / 1 + "ms/MB");
+    time = pad(time) + "ms";
+
+    console.log(title, time, totalMB, mbPerMs);
+}
+
+render(simpleHtml, model, "simple   ");
+render(google, model,     "google   ");
+render(wikipedia, model,  "wikipedia");
+render(variables, model,  "variables");
