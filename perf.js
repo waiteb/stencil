@@ -1,5 +1,7 @@
 /* jshint esversion: 6 */
 var Stencil = require("./index");
+var request = require('sync-request');
+
 var html = `
     <div alpha="{{alpha.value}}" beta="{{alpha.beta.value}}">
         <div alpha="{{alpha.value}}" beta="{{alpha.beta.value}}">
@@ -8,7 +10,17 @@ var html = `
             </div>
         </div>
      </div>
+
+    <div alpha="alpha.value" beta="alpha.beta.value">
+        <div alpha="alpha.value" beta="alpha.beta.value">
+            <div alpha="alpha.value" beta="alpha.beta.value">
+            </div>
+        </div>
+    </div>
 `;
+
+html = request("GET", "http://google.com").body.toString();
+
 var times = 1024 * 8;
 
 var stencil = new Stencil(html);
