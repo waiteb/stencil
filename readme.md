@@ -24,7 +24,7 @@
     <h2>Filters</h2>
     <script>
 
-        // Expressions are surrounded by double curly braces:
+        // Filters can transform the value of an expression:
         var stencil = new Stencil('<p>{{"Hello!"|uppercase}}</p>');
 
         var Stencil = require('stencil');
@@ -75,8 +75,8 @@
         var subhtml = '<p>Hi.</p>';
 
         var Stencil = require('stencil');
-        var stencil = new Stencil(html);
-        var substencil = new Stencil(subhtml);
+        var stencil = new Stencil(html);            // A stencil...
+        var substencil = new Stencil(subhtml);      // ...that uses another stencil.
 
         stencil.include({greeting: substencil});
 
@@ -85,10 +85,53 @@
     </script>
 
 
+    <h2>Using "this"</h2>
+    <script>
+
+        var html = '<p>{{this}}</p>';
+
+        var Stencil = require('stencil');
+        var stencil = new Stencil(html);
+        var model = "Hi...";
+
+        console.log(stencil.render(model));    // <p>Hi...</p>
+
+    </script>
+
+
+    <h2>Changing Scope</h2>
+    <script>
+
+        var html = '<p scope="data">{{greeting}}</p>';
+
+        var Stencil = require('stencil');
+        var stencil = new Stencil(html);
+        var model = {data: {greeting: "Hi!"}};
+
+        console.log(stencil.render(model));    // <p>Hi!</p>
+                                               
+    </script>
+
+
+    <h2>Naming a Scope</h2>
+    <script>
+
+        // A scope can be given a name:
+        var html = '<p scope="data as special">{{special.greeting}}</p>';
+
+        var Stencil = require('stencil');
+        var stencil = new Stencil(html);
+        var model = {data: {greeting: "¡Hola!"}};
+
+        console.log(stencil.render(model));    // <p>¡Hola!</p>
+                                               
+    </script>    
+
+
     <h2>Null Elements</h2>
     <script>
 
-        // The each attribute repeats an element:
+        // The tag portion of a null element isn't rendered:
         var html = '<x>Hello!</x>';
         
         var Stencil = require('stencil');

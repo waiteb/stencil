@@ -1,6 +1,10 @@
 /* jshint esversion: 6 */
+
+// TODO: This is just temporary, non-scientific benchmarking.
+// Eventually, this should compare/contrast with other solutions.
+
 var Stencil = require("./index");
-var request = require('sync-request');
+var request = require("sync-request");
 
 var variables = `
     <div alpha="{{alpha.value}}" beta="{{alpha.beta.value}}">
@@ -60,7 +64,8 @@ function render(html, model, title) {
     var time = Date.now() - start;
     var totalMB = totalBytes / 1000000;
         totalMB = pad(Math.round(totalMB * 10) / 10 + "MB");
-    var mbPerMs = pad(Math.round(mbPerMs * 1) / 1 + "ms/MB");
+    var mbPerMs = (time / totalBytes) * 1000000;
+        mbPerMs = pad(Math.round(mbPerMs * 1) / 1 + "ms/MB");
     time = pad(time) + "ms";
 
     console.log(title, time, totalMB, mbPerMs);
