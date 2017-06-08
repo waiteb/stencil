@@ -4,6 +4,8 @@
   "description": "",
   "main": "./lib/stencil.js",
   "scripts": {
+    "build": "./bin/build.sh",
+    "postinstall": "npm run build",
     "test": "mocha ./lib/*.test.js",
     "perf": "node --inspect --debug-brk perf.js"
   },

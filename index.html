@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+    <head>
+
+        <title>Client-Side Sample</title>
+
+        <!-- Here's a sample stencil -->
+        <template id="sample">
+
+            <h1></h1>
+
+            <h2>Simple Expressions</h2>
+            <output>Hello, {{who}}!</output>
+
+            <h2>Conditions: if/elseif/else</h2>
+            <output>                
+                <p if="who">if: {{who}}</p>
+                <p else>else: "who" is not defined</p>
+                
+                <p if="someVariable">if: {{someVariable}}</p>
+                <p if="who">elseif: {{who}}</p>
+                <p else>"else: nothing was defined</p>
+
+                <p if="someVariable">if: {{someVariable}}</p>
+                <p else>else: "someVariable" is not defined</p>
+            </output>
+
+            <h2>Looping</h2>
+            <output>
+                <ul>
+                    <li each="listItems">{{@index + 1}}: {{this}}</li>
+                </ul>
+            </output>
+
+            <h2>Null elements</h2>
+            <p>Only the body of a null tag is rendered.</p>
+            <output>
+                <x>Hello!</x>
+            </output>
+
+            <h2>Changing the model</h2>
+            <output>
+                <p model="who">Who: {{this}}</p>
+            </output>
+
+            <h2>Scoping</h2>
+            <p>This is incomplete.  I'm not sure what this syntax should be...</p>
+            <output>
+                <p scope="who as alpha, listItems.length as beta">Who: {{alpha}}, Item count: {{beta}}</p>
+            </output>
+
+            <h2>Substencils</h2>
+            <output>
+                <stencil name="gamma"/>
+            </output>
+
+            <h2>Logging</h2>
+            <p>Log elements go to the console</p>
+            <log>This is a log message.</log> 
+            <info>This is an info message.</info> 
+            <warn>This is a warn message.</warn> 
+            <error>This is an error message.</error> 
+
+            <h2>Debugging</h2>
+            <p>The debug attribute sets a breakpoint in the render method</p>
+            <!-- <output debug>Debugging...</output> -->
+
+        </template>
+
+        <!-- ...and a sample substencil -->
+        <template id="subsample">
+            <p>This is a substencil.</p>
+        </template>
+
+        <style>
+
+            output {
+                background: #ccc;
+                border: 1px solid #666;
+                display: block;
+                font-family: monospace;              
+                margin: 16px;
+                padding: 16px;
+            }
+
+        </style>
+
+
+    </head>
+    <body>
+
+        <script src="dist/stencil.dev.js"></script>
+        <script>
+
+            var Stencil = require("stencil");
+            
+            // Gather the HTML to use in the stencils:
+            var sample = document.getElementById("sample").innerHTML;
+            var subsample = document.getElementById("subsample").innerHTML;
+
+            // Define the stencils:
+            var stencil = new Stencil(sample);
+            var substencil = new Stencil(subsample);
+
+            // Include the substencil in the main stencil, and give it the name "gamma":
+            stencil.include({
+                gamma: substencil
+            });
+
+            // Bind will insert the rendered stencil into the given element:
+            stencil.bind(document.body, {who: "World", listItems: ["alpha", "beta", "gamma"]});
+        
+        </script>
+
+    </body>
+
+</html>
