@@ -9,10 +9,10 @@
     <h2>Expressions</h2>
     <script>
 
+        var Stencil = require('stencil');
+
         // Expressions are surrounded by double curly braces:
         var stencil = new Stencil('<p>{{greeting || "Hi."}}</p>');
-
-        var Stencil = require('stencil');
         var model = {greeting: 'Hello!'};
 
         console.log(stencil.render(model));    // <p>Hello!</p>
@@ -24,12 +24,12 @@
     <h2>Filters</h2>
     <script>
 
+        var Stencil = require('stencil');
+
         // Expressions are surrounded by double curly braces:
         var stencil = new Stencil('<p>{{"Hello!"|uppercase}}</p>');
 
-        var Stencil = require('stencil');
-
-        console.log(stencil.render());         // <p>HELLO!</p>
+        console.log(stencil.render());  // <p>HELLO!</p>
 
     </script>
     
@@ -37,11 +37,12 @@
     <h2>Conditions</h2>
     <script>
 
+        var Stencil = require('stencil');
+
         // if/elseif/else atrributes conditionally render elements:
         var html = '<p if="greeting">{{greeting}}</p>' + 
                    '<p else>...</p>';
 
-        var Stencil = require('stencil');
         var stencil = new Stencil(html);
         var model = {greeting: "Hi."};
 
@@ -54,10 +55,11 @@
     <h2>Looping</h2>
     <script>
 
+        var Stencil = require('stencil');
+
         // The each attribute repeats an element:
         var html = '<p each="greetings as greeting">{{@index + 1}}: {{greeting}}</p>";
 
-        var Stencil = require('stencil');
         var stencil = new Stencil(html);
         var model = {greetings: ["Hello!", "Hi.", "*nod*"]};
 
@@ -71,10 +73,11 @@
     <h2>Substencils</h2>
     <script>
 
+        var Stencil = require('stencil');
+
         var html = '<div><stencil name="greeting"/></div>';
         var subhtml = '<p>Hi.</p>';
 
-        var Stencil = require('stencil');
         var stencil = new Stencil(html);
         var substencil = new Stencil(subhtml);
 
@@ -88,10 +91,11 @@
     <h2>Null Elements</h2>
     <script>
 
+        var Stencil = require('stencil');
+
         // The each attribute repeats an element:
         var html = '<x>Hello!</x>';
         
-        var Stencil = require('stencil');
         var stencil = new Stencil(html);
 
         console.log(stencil.render(model));    // Hello!
@@ -102,17 +106,18 @@
     <h2>Two-Way Binding</h2>
     <script>
 
+        var Stencil = require('stencil');
+
         var html = '<p>{{greeting}}</p>';
         
-        var Stencil = require('stencil');
         var stencil = new Stencil(html);
         var model = {greeting: "Hi."}
 
-        var element = document.body;
+        var target = document.body;
 
         // <p>Hi.</p> will be injected into the <body> tag.
         // If a target is not specified, the default is document.body:
-        stencil.bind(model, element);
+        stencil.bind(target, model);
 
         // The body tag will be updated to <p>Hi!</p>.
         model.greeting = "Hi!";
@@ -124,9 +129,10 @@
     <h2>Event Binding</h2>
     <script>
 
+        var Stencil = require('stencil');
+
         var html = '<p onclick="{{sayHello}}">Click me!</p>';
         
-        var Stencil = require('stencil');
         var stencil = new Stencil(html);
         var model = {
             sayHello: fuction(event) {
