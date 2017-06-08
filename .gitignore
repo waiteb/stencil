@@ -2,6 +2,9 @@
 .DS_Store
 scratchpad.html
 
+#dist
+dist/*
+
 # Logs
 logs
 *.log

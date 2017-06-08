@@ -97,5 +97,48 @@
         console.log(stencil.render(model));    // Hello!
                                                
     </script>
+    
+    
+    <h2>Two-Way Binding</h2>
+    <script>
+
+        var html = '<p>{{greeting}}</p>';
+        
+        var Stencil = require('stencil');
+        var stencil = new Stencil(html);
+        var model = {greeting: "Hi."}
+
+        var element = document.body;
+
+        // <p>Hi.</p> will be injected into the <body> tag.
+        // If a target is not specified, the default is document.body:
+        stencil.bind(model, element);
+
+        // The body tag will be updated to <p>Hi!</p>.
+        model.greeting = "Hi!";
+        model.update();
+                                               
+    </script>
+
+
+    <h2>Event Binding</h2>
+    <script>
+
+        var html = '<p onclick="{{sayHello}}">Click me!</p>';
+        
+        var Stencil = require('stencil');
+        var stencil = new Stencil(html);
+        var model = {
+            sayHello: fuction(event) {
+                alert("Hello!");
+            }
+        };
+
+        // <p>Click me!</p> will be injected into the <body> tag,
+        // and clicking it will cause the sayHello method of the 
+        // model to be invoked.
+        stencil.bind(model);
+                                               
+    </script>
 
 
