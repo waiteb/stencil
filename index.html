@@ -8,7 +8,7 @@
         <!-- Here's a sample stencil -->
         <template id="sample">
 
-            <h1></h1>
+            <h1>Stencil</h1>
 
             <h2>Simple Expressions</h2>
             <output>Hello, {{who}}!</output>
@@ -19,7 +19,7 @@
                 <p else>else: "who" is not defined</p>
                 
                 <p if="someVariable">if: {{someVariable}}</p>
-                <p if="who">elseif: {{who}}</p>
+                <p elseif="who">elseif: {{who}}</p>
                 <p else>"else: nothing was defined</p>
 
                 <p if="someVariable">if: {{someVariable}}</p>
@@ -60,11 +60,21 @@
             <log>This is a log message.</log> 
             <info>This is an info message.</info> 
             <warn>This is a warn message.</warn> 
-            <error>This is an error message.</error> 
+            <error>This is an error message. {{who}}</error> 
 
             <h2>Debugging</h2>
             <p>The debug attribute sets a breakpoint in the render method</p>
             <!-- <output debug>Debugging...</output> -->
+
+            <h2>Event Delegation</h2>
+            <p>Methods referenced in expressions can be used in event handlers.</p>
+            <button onclick="{{doit}}">Click me!</button>
+
+            <h2>Automatic Updates</h2>
+            <p>Name: {{who}}</p>
+            <label>Name: 
+                <input placeholder="Type a name and press [enter]" onchange="{{update}}">
+            </label>
 
         </template>
 
@@ -108,8 +118,20 @@
                 gamma: substencil
             });
 
+            var model = {
+                who: "World", 
+                listItems: ["alpha", "beta", "gamma"],
+                doit: function() {
+                    alert("Hello, " + this.who + "!");
+                },
+                update: function(event) {
+                    this.who = event.target.value; 
+                    stencil.update(model);
+                }
+            };
+
             // Bind will insert the rendered stencil into the given element:
-            stencil.bind(document.body, {who: "World", listItems: ["alpha", "beta", "gamma"]});
+            stencil.bind(document.body, model);
         
         </script>
 
